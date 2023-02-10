@@ -177,7 +177,6 @@ export class ViewController {
 
       const url = process.env.LOCAL_URL
       // const filePath = path.resolve(__dirname, `./public/ANSWER-.pdf`)
-
       if (url) {
         await page.goto(url)
         const pdf = await page.pdf({ path: 'result.pdf', format: 'a4', printBackground: true })
