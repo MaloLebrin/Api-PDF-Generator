@@ -30,8 +30,7 @@ async function startApp() {
   })
 
   // Routes
-  app.get('/pages/view', new ViewController().GetView)
-  app.get('/pages/download', new ViewController().DownloadView)
+  app.get('/pages/download', new ViewController().SendView)
 
   const port = parseInt(process.env.PORT!) || 5555
   app.listen(port, '0.0.0.0', () => {
