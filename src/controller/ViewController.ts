@@ -1,17 +1,9 @@
 import type { Request, Response } from 'express'
-import fs from 'fs'
 import puppeteer from 'puppeteer'
 import { unlink } from 'fs'
 import { useLogger } from '../../loggerService';
 
 export class ViewController {
-
-  private async createAndWriteFile(content: string) {
-    const createStream = fs.createWriteStream("./src/views/invoice.handlebars");
-    createStream.write(content);
-    createStream.end()
-    await this.delay(500)
-  }
 
   private delay = async (ms: number) => new Promise(res => setTimeout(res, ms))
 
@@ -79,8 +71,6 @@ export class ViewController {
         })
 
         await browser.close()
-
-        // Content-Type: application/pdf
 
         return res.set({
           'Content-Type': 'application/pdf',

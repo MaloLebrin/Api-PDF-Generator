@@ -4,7 +4,6 @@ import cors from 'cors'
 import helmet from 'helmet'
 import dotenv from 'dotenv'
 import { useLogger } from './loggerService'
-import { hbs } from './src/handleBarConfig'
 import { ViewController } from './src/controller/ViewController'
 import path from 'path'
 
@@ -20,9 +19,6 @@ async function startApp() {
   app.use(express.urlencoded({ extended: true }))
   app.use(loggerMiddleware)
 
-  app.engine('handlebars', hbs.engine)
-  app.set('view engine', 'handlebars')
-  // app.set('views', '/app/src/views')
   app.set("views", path.resolve(__dirname, "./src/views"));
 
   app.get('/', (_req: Request, res: Response) => {
@@ -30,7 +26,7 @@ async function startApp() {
   })
 
   // Routes
-  app.get('/pages/download', new ViewController().SendView)
+  app.get('/pages/download/:id', new ViewController().SendView)
 
   const port = parseInt(process.env.PORT!) || 5555
   app.listen(port, '0.0.0.0', () => {
